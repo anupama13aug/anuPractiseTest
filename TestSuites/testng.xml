@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org">
+<suite parallel="tests" name="Suite">
+    <listeners>
+        <listener class-name="org.anutestframework.TestComponents.Listeners"/>
+    </listeners>
+    <test thread-count="5" name="Submit Order Test">
+        <classes>
+            <class name="org.anutestframework.Tests.SubmitOrderTest"/>
+        </classes>
+    </test>
+    <test thread-count="5" name="Login Error Validation Test">
+        <classes>
+            <class name="org.anutestframework.Tests.LoginErrorValidation"/>
+        </classes>
+    </test>
+</suite>

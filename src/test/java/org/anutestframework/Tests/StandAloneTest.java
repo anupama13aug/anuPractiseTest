@@ -1,4 +1,4 @@
-package org.anutestframework;
+package org.anutestframework.Tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.anutestframework.pageobjects.LoginPage;

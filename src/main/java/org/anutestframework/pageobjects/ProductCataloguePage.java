@@ -1,6 +1,7 @@
 package org.anutestframework.pageobjects;
 
 import org.anutestframework.AbstractComponents.AbstractComponent;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +14,7 @@ public class ProductCataloguePage extends AbstractComponent {
     WebDriver driver;
 
     public ProductCataloguePage(WebDriver driver){
-
+        super(driver);
         this.driver=driver;
         PageFactory.initElements(driver, this);
     }
@@ -24,5 +25,26 @@ public class ProductCataloguePage extends AbstractComponent {
     @FindBy(css = ".mb-3")
     List<WebElement> products ;
 
+    By productBy= By.cssSelector(".mb-3");
+    By addToCart= By.cssSelector(".card-body button:last-of-type");
+    By toastMessage= By.cssSelector("#toast-container");
+
+    public List<WebElement> getProductList(){
+        waitForElementToAppearBy(productBy);
+        return products;
+    }
+
+    public WebElement getProductByName(String productName){
+        WebElement prod= getProductList().stream().filter(product ->
+                product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst().orElse(null);
+        return prod;
+    }
+
+    public void addProductToCart(String productName) throws InterruptedException {
+        WebElement prod= getProductByName(productName);
+        prod.findElement(addToCart).click();
+        waitForElementToAppearBy(toastMessage);
+        waitForElementToDisappear();
+    }
 
 }

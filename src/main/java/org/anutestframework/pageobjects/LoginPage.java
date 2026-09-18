@@ -22,12 +22,21 @@ public class LoginPage extends AbstractComponent {
 
     @FindBy(id = "login") WebElement loginBtn ;
 
-    public void loginApplication(String email, String password){
+    @FindBy(css = "[class*='flyInOut']") WebElement errorMessage ;
+
+    public ProductCataloguePage loginApplication(String email, String password){
         userEmailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         loginBtn.click();
+        return new ProductCataloguePage(driver);
     }
     public void goTo(){
         driver.get("https://rahulshettyacademy.com/client");
+    }
+
+    public String getErrorMessage(){
+        waitForWebElementToAppear(errorMessage);
+        return errorMessage.getText();
+
     }
 }
